@@ -6,6 +6,8 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
+import java.util.List;
+
 public class sauceDemo extends driver{
 
     public sauceDemo(WebDriver driver, String url){
@@ -34,4 +36,14 @@ public class sauceDemo extends driver{
     public String getText(String css){
         return driver.findElement(By.cssSelector(css)).getText();
     }
+
+    public void openBurgerMenu(){
+        driver.findElement(By.id("react-burger-menu-btn")).click();
+    }
+
+    public int countImages(String src){
+        List<WebElement> images = driver.findElements(By.cssSelector("img[src='"+src+"']"));
+        return images.size();
+    }
+
 }
