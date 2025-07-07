@@ -57,6 +57,36 @@ public class inventoryPageTest {
         Assertions.assertEquals(NavigateInventoryPage.expectedProductNamesAZ(), NavigateInventoryPage.actualProductNames());
     }
 
+    @Test
+    public void sortPriceLH(){
+        NavigateInventoryPage.sortPriceLH();
+        Assertions.assertEquals(NavigateInventoryPage.expectedProductPriceLH(), NavigateInventoryPage.actualProductPrice());
+    }
+
+    @Test
+    public void sortPriceHL(){
+        NavigateInventoryPage.sortPriceHL();
+        Assertions.assertEquals(NavigateInventoryPage.expectedProductPriceHL(), NavigateInventoryPage.actualProductPrice());
+    }
+
+    @Test
+    public void logoutTest(){
+        NavigateInventoryPage.logout();
+        Assertions.assertTrue(driver.findElement(By.id("login-button")).isEnabled());
+    }
+
+    @Test
+    public void productDetail(){
+        NavigateInventoryPage.productDetail();
+        Assertions.assertEquals("carry.allTheThings() with the sleek, streamlined Sly Pack that melds uncompromising style with unequaled laptop and tablet protection.", driver.findElement(By.cssSelector(".inventory_details_desc.large_size")).getText());
+    }
+
+    @Test
+    public void goBackToProducts(){
+        NavigateInventoryPage.goBackToProducts();
+        Assertions.assertTrue(driver.findElement(By.id("add-to-cart-sauce-labs-backpack")).isEnabled());
+    }
+
     @AfterEach
     public void closeDriver(){
         driver.quit();

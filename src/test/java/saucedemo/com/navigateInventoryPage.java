@@ -11,6 +11,7 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.time.Duration;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
@@ -28,7 +29,6 @@ public class navigateInventoryPage {
 
     public void removeProduct(String idElement){
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
-        //WebElement removeButton = wait.until(ExpectedConditions.elementToBeClickable(By.id(idElement)));
         driver.findElement(By.id(idElement)).click();
     }
 
@@ -86,4 +86,65 @@ public class navigateInventoryPage {
         Collections.sort(expectedProductNamesAZ);
         return expectedProductNamesAZ;
     }
+
+    public void sortPriceLH(){
+        driver.findElement(By.cssSelector(".product_sort_container")).click();
+        driver.findElement(By.cssSelector("[value='lohi']")).click();
+    }
+
+    public List expectedProductPriceLH(){
+        List<WebElement> productElements = driver.findElements(By.className("inventory_item_price"));
+        List<Double> actualProductPrice = new ArrayList<>();
+        for (WebElement product : productElements) {
+            String priceText = product.getText().replace("$", "");
+            actualProductPrice.add(Double.parseDouble(priceText));
+        }
+        List<Double> expectedProductPrice = new ArrayList<>(actualProductPrice);
+        Collections.sort(expectedProductPrice);
+        return expectedProductPrice;
+    }
+
+    public List actualProductPrice(){
+        List<WebElement> productElements = driver.findElements(By.className("inventory_item_price"));
+        List<Double> actualProductPrice = new ArrayList<>();
+        for (WebElement product : productElements) {
+            String priceText = product.getText().replace("$", "");
+            actualProductPrice.add(Double.parseDouble(priceText));
+        }
+        return actualProductPrice;
+    }
+
+    public void sortPriceHL(){
+        driver.findElement(By.cssSelector(".product_sort_container")).click();
+        driver.findElement(By.cssSelector("[value='hilo']")).click();
+    }
+
+    public List expectedProductPriceHL(){
+        List<WebElement> productElements = driver.findElements(By.className("inventory_item_price"));
+        List<Double> actualProductPrice = new ArrayList<>();
+        for (WebElement product : productElements) {
+            String priceText = product.getText().replace("$", "");
+            actualProductPrice.add(Double.parseDouble(priceText));
+        }
+        List<Double> expectedProductPrice = new ArrayList<>(actualProductPrice);
+        expectedProductPrice.sort(Collections.reverseOrder());
+        return expectedProductPrice;
+    }
+
+    public void logout(){
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+        driver.findElement(By.id("react-burger-menu-btn")).click();
+        WebElement logoutLink = wait.until(ExpectedConditions.elementToBeClickable(By.id("logout_sidebar_link")));
+        logoutLink.click();
+    }
+
+    public void productDetail(){
+        driver.findElement((By.id("item_4_title_link"))).click();
+    }
+
+    public void goBackToProducts(){
+        driver.findElement((By.id("item_4_title_link"))).click();
+        driver.findElement(By.cssSelector(".btn.btn_secondary.back.btn_large.inventory_details_back_button")).click();
+    }
+
 }
