@@ -31,4 +31,49 @@ public class checkOut {
         finishBtn.click();
     }
 
+    public void missingNameCheckOut(){
+        driver.findElement(By.cssSelector(".shopping_cart_link")).click();
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+        WebElement checkout = wait.until(ExpectedConditions.elementToBeClickable(By.id("checkout")));
+        checkout.click();
+        WebElement lastName = wait.until(ExpectedConditions.elementToBeClickable(By.id("last-name")));
+        lastName.sendKeys("UserLastName");
+        WebElement zipCode = driver.findElement(By.id("postal-code"));
+        zipCode.sendKeys("5000");
+        driver.findElement(By.id("continue")).click();
+    }
+
+    public void missingLastnameCheckOut(){
+        driver.findElement(By.cssSelector(".shopping_cart_link")).click();
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+        WebElement checkout = wait.until(ExpectedConditions.elementToBeClickable(By.id("checkout")));
+        checkout.click();
+        WebElement firstName = wait.until(ExpectedConditions.elementToBeClickable(By.id("first-name")));
+        firstName.sendKeys("UserName");
+        WebElement zipCode = driver.findElement(By.id("postal-code"));
+        zipCode.sendKeys("5000");
+        driver.findElement(By.id("continue")).click();
+    }
+
+    public void missingZipcodeCheckOut(){
+        driver.findElement(By.cssSelector(".shopping_cart_link")).click();
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+        WebElement checkout = wait.until(ExpectedConditions.elementToBeClickable(By.id("checkout")));
+        checkout.click();
+        WebElement firstName = wait.until(ExpectedConditions.elementToBeClickable(By.id("first-name")));
+        firstName.sendKeys("UserName");
+        WebElement lastName = driver.findElement(By.id("last-name"));
+        lastName.sendKeys("UserLastName");
+        driver.findElement(By.id("continue")).click();
+    }
+
+    public void cancelCheckOut(){
+        driver.findElement(By.cssSelector(".shopping_cart_link")).click();
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+        WebElement checkout = wait.until(ExpectedConditions.elementToBeClickable(By.id("checkout")));
+        checkout.click();
+        driver.findElement(By.cssSelector("#cancel")).click();
+        wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+    }
+
 }

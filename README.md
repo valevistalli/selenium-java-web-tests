@@ -65,11 +65,9 @@ Stored in the tests/ package, these cover:
 
 - Navigation to inventory page
 
-- Adding items to cart (planned)
+- Adding items to cart 
 
-- Checkout process (planned)
-
-More scenarios coming soon!
+- Checkout process
 
 ---
 

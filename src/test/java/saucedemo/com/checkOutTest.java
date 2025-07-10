@@ -34,6 +34,31 @@ public class checkOutTest {
         Assertions.assertEquals("Thank you for your order!",driver.findElement(By.cssSelector("[class='complete-header']")).getText());
     }
 
+    @Test
+    public void missingNameCheckOut(){
+        CheckOut.missingNameCheckOut();
+        Assertions.assertEquals("Error: First Name is required", driver.findElement(By.cssSelector("[data-test='error']")).getText());
+    }
+
+    @Test
+    public void missingLastnameCheckOut(){
+        CheckOut.missingLastnameCheckOut();
+        Assertions.assertEquals("Error: Last Name is required", driver.findElement(By.cssSelector("[data-test='error']")).getText());
+    }
+
+    @Test
+    public void missingZipcodeCheckOut(){
+        CheckOut.missingZipcodeCheckOut();
+        Assertions.assertEquals("Error: Postal Code is required", driver.findElement(By.cssSelector("[data-test='error']")).getText());
+    }
+
+    @Test
+    public void cancelCheckOut(){
+        CheckOut.cancelCheckOut();
+        String url = driver.getCurrentUrl();
+        Assertions.assertEquals("https://www.saucedemo.com/cart.html", url);
+    }
+
     @AfterEach
     public void closeDriver(){
         driver.quit();
